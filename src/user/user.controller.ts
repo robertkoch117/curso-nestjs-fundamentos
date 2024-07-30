@@ -3,13 +3,16 @@ import { Delete, Patch } from "@nestjs/common/decorators/http";
 import { CreateUserDTO } from "./dto/create-user.dto";
 import { UpdatePatchUserDTO } from "./dto/update-patch-user.dto";
 import { UpdatePutUserDTO } from "./dto/update-put-user.dto";
+import { UserService } from "./user.service";
 
 @Controller('users')
 export class UserController {
 
+    constructor(private readonly userService: UserService){}
+
     @Post()
-    async create(@Body() {email, name, password}: CreateUserDTO){
-        return {email, name, password};
+    async create(@Body() data: CreateUserDTO){
+        return this.userService.create(data);
     }
 
     @Get()
