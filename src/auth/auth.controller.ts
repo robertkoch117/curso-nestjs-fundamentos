@@ -1,4 +1,5 @@
 import { Controller, Post, Body, UseGuards, Req } from "@nestjs/common";
+import { User } from "src/decorators/user.decorator";
 import { AuthGuard } from "src/guards/auth.guard";
 import { UserService } from "src/user/user.service";
 import { AuthService } from "./auth.service";
@@ -37,8 +38,8 @@ export class AuthController{
 
     @UseGuards(AuthGuard)
     @Post('me')
-    async me(@Req() req){
-        return {me: 'ok', data: req.tokenPayload};
+    async me(@User() user){
+        return {user};
     }
 
 }
