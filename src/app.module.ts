@@ -1,4 +1,5 @@
 import { forwardRef, Module } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
 import { APP_GUARD } from '@nestjs/core/constants';
 import { ThrottlerModule } from '@nestjs/throttler';
 import { ThrottlerGuard } from '@nestjs/throttler/dist/throttler.guard';
@@ -9,6 +10,7 @@ import { UserModule } from './user/user.module';
 
 @Module({
   imports: [
+    ConfigModule.forRoot(),
     ThrottlerModule.forRoot([{
       ttl: 60000,
       limit: 100
